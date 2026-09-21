@@ -1,0 +1,30 @@
+ANNUAL WELLNESS EXAMINATION
+==========================
+Patient ID: PT-33109
+Date: 2026-02-18
+Clinic: Northside Family Medicine
+Clinician: Dr. Marcus Vance, MD
+
+SUBJECTIVE:
+42-year-old female presenting for routine annual preventative exam. No acute medical complaints. Exercises 4x weekly, eats a balanced Mediterranean-style diet.
+
+VITAL SIGNS:
+- Blood Pressure: 118/76 mmHg (Left arm, seated)
+- Heart Rate: 68 bpm
+- Temperature: 98.4 F (Oral)
+- Height: 5 ft 6 in | Weight: 138 lbs | BMI: 22.3 kg/m²
+
+PREVENTATIVE LAB PANEL (LabCorp 2026-02-10):
+- HbA1c: 5.4 % (Standard reference: 4.0 - 5.6% for non-diabetic)
+- Comprehensive Metabolic Panel: Within normal limits
+- Lipid Panel: LDL 92 mg/dL, HDL 64 mg/dL, Triglycerides 98 mg/dL
+
+ASSESSMENT:
+- Healthy adult female with optimal cardiovascular markers.
+- Blood pressure is normotensive (<120/80 mmHg).
+- Glycemic status normal (HbA1c 5.4%).
+
+PLAN:
+- Continue healthy diet and exercise regimen.
+- Routine follow-up in 12 months.
+

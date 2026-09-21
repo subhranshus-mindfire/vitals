@@ -1,0 +1,138 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "azureFunctionEndpoint": {
+      "type": "String",
+      "defaultValue": "https://func-vitals-extractor-dev.azurewebsites.net/api/extract"
+    },
+    "databaseServer": {
+      "type": "String",
+      "defaultValue": "psql-vitals-dev-centralindia.postgres.database.azure.com"
+    }
+  },
+  "triggers": {
+    "manual_or_blob_trigger": {
+      "type": "Request",
+      "kind": "Http",
+      "inputs": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "document_id": { "type": "string" },
+            "document_name": { "type": "string" },
+            "blob_url": { "type": "string" },
+            "blob_name": { "type": "string" },
+            "triggered_by": { "type": "string", "default": "logic_app" }
+          },
+          "required": ["document_name"]
+        }
+      }
+    }
+  },
+  "actions": {
+    "Call_Azure_Function_Extractor": {
+      "type": "Http",
+      "inputs": {
+        "method": "POST",
+        "uri": "@parameters('azureFunctionEndpoint')",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "document_name": "@triggerBody()?['document_name']",
+          "blob_url": "@triggerBody()?['blob_url']",
+          "blob_name": "@triggerBody()?['blob_name']"
+        },
+        "retryPolicy": {
+          "type": "exponential",
+          "count": 3,
+          "interval": "PT10S",
+          "minimumInterval": "PT5S",
+          "maximumInterval": "PT1M"
+        }
+      },
+      "runAfter": {}
+    },
+    "Parse_Extraction_JSON": {
+      "type": "ParseJson",
+      "inputs": {
+        "content": "@body('Call_Azure_Function_Extractor')",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "document_name": { "type": "string" },
+            "document_type": { "type": "string" },
+            "measure": { "type": ["string", "null"] },
+            "associated_date": { "type": ["string", "null"] },
+            "status": { "type": "string" },
+            "confidence_score": { "type": "number" },
+            "status_reason": { "type": "string" },
+            "patient_id": { "type": ["string", "null"] }
+          }
+        }
+      },
+      "runAfter": {
+        "Call_Azure_Function_Extractor": ["Succeeded"]
+      }
+    },
+    "Check_Processing_Status": {
+      "type": "Switch",
+      "expression": "@body('Parse_Extraction_JSON')?['status']",
+      "cases": {
+        "Case_Success": {
+          "case": "Success",
+          "actions": {
+            "Log_Success_Event": {
+              "type": "Http",
+              "inputs": {
+                "method": "POST",
+                "uri": "https://api-vitals.internal/events/success",
+                "body": "@body('Parse_Extraction_JSON')"
+              }
+            }
+          }
+        },
+        "Case_Needs_Review": {
+          "case": "Needs Review",
+          "actions": {
+            "Flag_For_Clinician_Review": {
+              "type": "Http",
+              "inputs": {
+                "method": "POST",
+                "uri": "https://api-vitals.internal/events/review-queue",
+                "body": "@body('Parse_Extraction_JSON')"
+              }
+            }
+          }
+        }
+      },
+      "default": {
+        "actions": {
+          "Flag_Technical_Failure": {
+            "type": "Http",
+            "inputs": {
+              "method": "POST",
+              "uri": "https://api-vitals.internal/events/failure",
+              "body": "@body('Parse_Extraction_JSON')"
+            }
+          }
+        }
+      },
+      "runAfter": {
+        "Parse_Extraction_JSON": ["Succeeded"]
+      }
+    },
+    "Return_Processing_Response": {
+      "type": "Response",
+      "inputs": {
+        "statusCode": 200,
+        "body": "@body('Parse_Extraction_JSON')"
+      },
+      "runAfter": {
+        "Check_Processing_Status": ["Succeeded", "Failed", "Skipped"]
+      }
+    }
+  }
+}
+

@@ -1,0 +1,33 @@
+CLINICAL PROGRESS NOTE
+======================
+Patient ID: PT-90214
+Visit Date: 2026-03-14
+Encounter Type: Outpatient Endocrinology Follow-up
+Attending Physician: Dr. Sarah Lin, MD
+
+CHIEF COMPLAINT:
+Follow-up evaluation for management of Type 2 Diabetes Mellitus and Essential Hypertension.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 58-year-old male with a 6-year history of T2D and hypertension. Reports overall adherence to metformin 1000mg BID and lisinopril 20mg daily. No hypoglycemic episodes reported over the past 3 months. Mild fatigue noted in afternoons.
+
+PHYSICAL EXAMINATION:
+Vitals:
+- Blood Pressure: 142/90 mmHg (Right arm, seated, repeat 138/88 mmHg)
+- Pulse: 74 bpm, regular
+- Respiratory Rate: 16 breaths/min
+- Body Mass Index (BMI): 29.4 kg/m²
+
+LABORATORY DATA:
+Drawn: 2026-03-12
+- Glycated Hemoglobin (HbA1c): 7.8 % (Reference: < 5.7 %)
+- Fasting Blood Glucose: 154 mg/dL
+- Serum Creatinine: 1.0 mg/dL
+- eGFR: > 60 mL/min/1.73m²
+- Total Cholesterol: 198 mg/dL
+
+ASSESSMENT & PLAN:
+1. Type 2 Diabetes Mellitus: Suboptimally controlled with HbA1c 7.8%. Plan to intensify lifestyle counseling and consider initiating SGLT2 inhibitor (empagliflozin 10mg daily).
+2. Essential Hypertension: Stage 2 Hypertension noted today (BP 142/90 mmHg). Will titrate lisinopril to 30mg daily and recheck in 4 weeks.
+3. Follow-up lab panel scheduled in 3 months.
+

@@ -1,0 +1,14 @@
+INVOICE #INV-2026-8812
+MEDITECH SUPPLIES & SERVICES LLC
+Date: 2026-01-15
+
+Bill To: Northside Clinic Accounts Payable
+Description:
+- 10x Disposable Blood Pressure Cuffs (Adult Medium) - $150.00
+- 5x HbA1c Reagent Test Cartridges (Box of 20) - $450.00
+- Shipping & Handling - $25.00
+
+Total Due: $625.00
+Payment Terms: Net 30 days
+Thank you for your business!
+

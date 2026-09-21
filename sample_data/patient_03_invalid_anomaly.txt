@@ -1,0 +1,20 @@
+EMERGENCY DEPARTMENT TRIAGE NOTE (ANOMALY TESTING)
+===================================================
+Patient ID: PT-ERR-999
+Date: 2026-04-01
+Triage Nurse: J. Miller, RN
+
+CHIEF COMPLAINT:
+Severe dizziness and palpitations after medication mix-up.
+
+RECORDED VITALS (POSSIBLE SENSOR ARTIFACT / TYPO):
+- Blood Pressure: 310/185 mmHg (Sensor alarm triggered, cuff slipping off patient arm during movement)
+- Heart Rate: 135 bpm
+- SpO2: 97% room air
+
+LABORATORY PRELIMINARY:
+- Point-of-Care HbA1c: 24.5 % (Instrument reported error code: OUT_OF_CALIBRATION_RANGE)
+
+CLINICAL CAUTION:
+Values appear physiologically implausible or corrupted by device error. Requires immediate re-measurement and clinical review.
+

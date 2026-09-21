@@ -1,0 +1,5 @@
+# Azure Functions Python Worker Runtime Dependencies
+azure-functions>=1.18.0
+python-dotenv>=1.0.0
+pypdf>=3.0.0
+
