@@ -29,6 +29,11 @@ if str(project_root) not in sys.path:
 
 from dotenv import load_dotenv
 load_dotenv(project_root / ".env")
+try:
+    from dotenv import load_dotenv
+    load_dotenv(project_root / ".env")
+except ImportError:
+    pass
 
 try:
     import azure.functions as func
