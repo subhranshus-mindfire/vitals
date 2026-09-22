@@ -56,6 +56,7 @@ class PipelineOrchestratorService:
                     headers={"Content-Type": "application/json", "User-Agent": "ClinicWorks-WebDashboard"}
                 )
                 with urllib.request.urlopen(req_obj, timeout=45) as resp:
+                with urllib.request.urlopen(req_obj, timeout=60) as resp:
                     return json.loads(resp.read().decode("utf-8"))
             except Exception as ex:
                 logging.warning(f"HTTP invocation to Azure Function ({func_url}) failed: {ex}. Attempting local fallback.")
@@ -64,6 +65,11 @@ class PipelineOrchestratorService:
         try:
             from azure_function.function_app import extract_document, func
             req = func.HttpRequest(body=json.dumps(payload).encode("utf-8"), method="POST")
+            req = func.HttpRequest(
+                method="POST",
+                url="http://localhost/api/extract",
+                body=json.dumps(payload).encode("utf-8")
+            )
             resp = extract_document(req)
             return json.loads(resp.get_body().decode("utf-8"))
         except Exception as local_ex:
