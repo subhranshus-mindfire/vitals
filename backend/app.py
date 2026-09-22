@@ -407,5 +407,6 @@ def run_server(port=8000):
 
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
+    port = int(os.getenv("PORT", sys.argv[1] if len(sys.argv) > 1 else 8000))
     run_server(port)
 

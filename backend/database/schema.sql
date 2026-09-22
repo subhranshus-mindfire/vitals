@@ -1,14 +1,12 @@
 -- =============================================================================
 -- Vitals Clinical Document Intelligence Platform: PostgreSQL Database Schema
 -- Compatible with: Azure Database for PostgreSQL (Flexible Server) and local PostgreSQL
+-- Uses native gen_random_uuid() available by default in PostgreSQL 13+
 -- =============================================================================
-
--- Enable UUID extension if supported
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- 1. Documents Table: Tracks raw document uploads, blob storage locations, and pipeline status
 CREATE TABLE IF NOT EXISTS documents (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     filename VARCHAR(255) NOT NULL,
     blob_path VARCHAR(500) NOT NULL UNIQUE,
     blob_url TEXT NOT NULL,
@@ -78,4 +76,3 @@ CREATE INDEX IF NOT EXISTS idx_documents_patient_id ON documents(patient_id);
 CREATE INDEX IF NOT EXISTS idx_vital_metrics_doc_id ON vital_metrics(document_id);
 CREATE INDEX IF NOT EXISTS idx_validation_logs_doc_id ON validation_logs(document_id);
 CREATE INDEX IF NOT EXISTS idx_retry_history_doc_id ON retry_history(document_id);
-
